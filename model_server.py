@@ -46,9 +46,9 @@ def run_model():
     dataset_level = determine_dataset_level(df)
     
     if experiment_type=="Regression" and run_type=="LinearRegression":
-        result = run_linear(experiment_type, run_type, dataset_level)
+        result = regression_run_linear(experiment_type, run_type, dataset_level)
     if experiment_type=="Regression" and run_type=="GBTRegressor":
-        result = gbt_regressor(experiment_type, run_type, dataset_level)
+        result = regression_gbt_regressor(experiment_type, run_type, dataset_level)
     if experiment_type=="Regression" and run_type=="RandomForest":
         result = regression_random_forest(experiment_type, run_type, dataset_level)
     if experiment_type=="Regression" and run_type=="DecisionTree":
@@ -64,7 +64,7 @@ def run_model():
     if experiment_type=="Classification" and run_type=="LogisticRegression":
         result = classification_LogisticRegression(experiment_type, run_type, dataset_level)
     if experiment_type=="Classification" and run_type=="DecisionTree":
-        result = decision_tree(experiment_type, run_type, dataset_level)
+        result = classification_decision_tree(experiment_type, run_type, dataset_level)
     if experiment_type=="Classification" and run_type=="RandomForest":
         result = classification_random_forest(experiment_type, run_type, dataset_level)
     if experiment_type=="Classification" and run_type=="GBTClassifier":
