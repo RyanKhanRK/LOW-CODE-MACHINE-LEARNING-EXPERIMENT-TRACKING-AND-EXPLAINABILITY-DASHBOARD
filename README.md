@@ -1,8 +1,8 @@
 # LOW-CODE MACHINE LEARNING EXPERIMENT TRACKING & EXPLAINABILITY DASHBOARD
 
-This project implements a lightweight web-based dashboard integrated with **MLflow** to support machine learning experiment tracking, run comparison, and model explainability.
+This project implements a lightweight, web-based dashboard integrated with MLflow to support automated machine learning experimentation, experiment tracking, run comparison, and model explainability.
 
-The system was developed for **academic purposes** to demonstrate practical usage of MLflow for experiment analysis and to enhance model transparency through **SHAP-based explainability**.
+The system is developed for academic and research purposes to demonstrate an end-to-end low-code machine learning workflow, including data ingestion, preprocessing, model execution, evaluation, and explainability within a unified platform.
 
 ---
 
@@ -12,9 +12,11 @@ This project presents a low-code machine learning experiment tracking and explai
 
 It extends MLflow’s default capabilities by introducing:
 
-- Automated experiment and run handling through MLflow APIs
+- Dataset ingestion and structural analysis
+- User-controlled data preprocessing
+- Automated experiment and run creation using MLflow APIs
+- Automated model training, evaluation, and logging
 - Dataset-aware run comparison (same dataset only)
-- Structured visualization of experiment metrics
 - Integrated SHAP-based explainability
 - A custom web-based dashboard for experiment analysis
 
@@ -24,13 +26,29 @@ The system is designed for academic and research use, focusing on reproducibilit
 
 ## Implemented Features
 
-### Experiment Run Comparison
+## Dataset Ingestion and Preprocessing
+
+1. Supports uploading arbitrary CSV datasets
+2. Automatically analyzes dataset structure and feature types
+3. Allows users to configure preprocessing options, including:
+ - Removing rows with missing values
+ - Replacing missing values using feature mean
+4. Applies preprocessing consistently across all experiment runs
+
+## Automated Experiment and Run Handling
+
+- Automatically creates MLflow experiments for uploaded datasets
+- Automatically generates runs for selected machine learning models
+- Handles training, evaluation, and logging programmatically
+- Logs parameters, metrics, and artifacts in a structured manner
+
+## Experiment Run Comparison
 
 - Retrieves experiment runs logged in MLflow
 - Displays evaluation metrics for each run
 - Enables side-by-side comparison between runs
 - Identifies the best-performing run based on selected metrics
-- Restricts comparison to runs from the same dataset
+- Restricts comparison to runs originating from the same dataset
 
 ### Model Explainability (SHAP)
 
@@ -40,7 +58,7 @@ The system is designed for academic and research use, focusing on reproducibilit
 - Integrated directly into the web dashboard
 
 > **Note:**  
-> Only run comparison and SHAP explainability were implemented as additional web-based features.
+> Run comparison and SHAP explainability are implemented as custom web-based features extending MLflow’s default functionality.
 
 ---
 
@@ -50,6 +68,7 @@ The system is designed for academic and research use, focusing on reproducibilit
 
 - Python
 - MLflow
+- Scikit-learn
 
 ### Frontend
 
@@ -104,7 +123,7 @@ python cors_proxy.py
 python3 -m http.server 8000
 ```
 
-#### 3. Start the CORS Proxy
+#### 3. Start the MLflow Tracking Server
 ```bash
 mlflow server --host 0.0.0.0 --port 5000
 ```
@@ -121,10 +140,13 @@ http://localhost:8000/
 ```
 
 ## System Workflow
-1. Machine learning models are trained and logged using MLflow
-2. Experiment runs and evaluation metrics are stored in the MLflow tracking server
-3. The web dashboard retrieves run data via MLflow APIs
-4. Users can:
+1. Users upload a dataset through the web dashboard
+2. The system analyzes dataset structure and feature types
+3. Users configure preprocessing options
+4. Experiments and runs are automatically created in MLflow
+5. Models are trained, evaluated, and logged
+6. The dashboard retrieves experiment data via MLflow APIs
+7. Users can:
  - Compare multiple experiment runs
  - Identify the best-performing model
  - View SHAP-based explainability visualizations
@@ -136,8 +158,9 @@ http://localhost:8000/
  - The system is intended for academic evaluation and demonstration purposes only
 
 ## Future Improvements
- - Integration with MLflow Model Registry
- - Automated fairness evaluation
- - Load and performance testing
- - Containerized deployment (Docker)
- - Enhanced explainability visualizations
+- Integration with MLflow Model Registry
+- Advanced preprocessing pipelines
+- Automated fairness and bias evaluation
+- Load and performance testing
+- Containerized deployment (Docker)
+- Enhanced explainability visualizations
